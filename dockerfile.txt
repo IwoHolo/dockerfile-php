@@ -1,0 +1,5 @@
+FROM php:7.2-apache
+RUN rm -rf /var/lib/apt/lists/*
+RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h
+CMD sed -i "s/80/$PORT/g" /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf && docker-php-entrypoint apache2-foreground
+COPY . /var/www/html
